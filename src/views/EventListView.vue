@@ -1,9 +1,13 @@
 <script setup lang="ts">
-  import axios from 'axios'
+  import EventCard from '@/components/EventCard.vue'
+  import eventService from '@/services/EventService'
   import { ref } from 'vue'
   import type { Event } from '@/types'
   const events = ref<Event[]>([])
-    axios.get('http://localhost:3000/events').then((response) => {
+  interface EventResponse {
+    data: Event[]
+  }
+  eventService.getEvents().then((response:EventRespose) => {
     events.value = response.data
   })
 </script>
